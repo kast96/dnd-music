@@ -1,0 +1,74 @@
+.h1 {
+	font-size: 48px;
+	text-align: center;
+}
+
+.playlist {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	gap: 40px;
+}
+
+.player {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 80px;
+	border-top: 1px solid var(--border-color);
+	background-color: var(--background-color);
+}
+
+.button {
+	display: flex;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius);
+	padding: 10px;
+	background: none;
+	color: inherit;
+	font: inherit;
+	outline: inherit;
+	cursor: pointer;
+
+	&_active {
+		color: var(--main-color);
+	}
+
+	&:hover {
+		color: #fff;
+		background-color: var(--main-color);
+	}
+
+	&:active {
+		background-color: var(--main-color-darken);
+	}
+}
+
+.icon {
+	width: 30px;
+	height: 30px;
+}
+
+.track {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	width: 600px;
+
+	&_image {
+		width: 50px;
+		height: 50px;
+		object-fit: cover;
+		border-radius: var(--border-radius);
+	}
+
+	&_title {
+		font-weight: 600;
+	}
+}

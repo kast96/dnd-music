@@ -1,0 +1,22 @@
+import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"
+import s from './TrackItem.module.scss'
+import { getFieNameFromPath } from "../../../../functions/getFieNameFromPath"
+
+type PropsType = {
+	path: string
+	selected: boolean
+	onClickPlay: () => void
+	onPause: () => void
+}
+
+export const TrackItem: React.FC<PropsType> = ({path, selected, onClickPlay, onPause}) => {
+	return (
+		<div className={s.container}>
+			<div className={s.button} onClick={selected ? onPause : onClickPlay}>
+				{!selected &&	<AiFillPlayCircle className={s.icon} />}
+				{selected && <AiFillPauseCircle className={s.icon} />}
+			</div>
+			<div className={s.name}>{getFieNameFromPath(path)}</div>
+		</div>
+	)
+}

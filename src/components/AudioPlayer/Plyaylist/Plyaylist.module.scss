@@ -1,0 +1,77 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 360px;
+	padding: var(--padding-block);
+	border-radius: var(--border-radius);
+	border: 1px solid var(--border-color);
+}
+
+.title {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	text-align: center;
+}
+
+.image {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	border-radius: var(--border-radius);
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.picture {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80px;
+	height: 80px;
+	color: var(--main-color);
+	background-color: #fff;
+	border-radius: 50%;
+	box-shadow: 0 0 10px #000;
+}
+
+.image:hover .icon {
+	color: var(--main-color-darken);
+}
+
+.tracks_header {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+	padding-top: 20px;
+	cursor: pointer;
+
+	&_title {
+		font-weight: 600;
+	}
+
+	&_icon {
+		display: flex;
+		flex-shrink: 0;
+	}
+}
+
+.tracks_container:global(.is-open) .tracks_header_icon {
+	transform: rotate(180deg);
+}
+
+.tracks {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 20px;
+	max-height: 400px;
+	overflow: auto;
+}
