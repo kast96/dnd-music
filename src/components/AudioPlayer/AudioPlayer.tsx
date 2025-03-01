@@ -5,6 +5,7 @@ import s from './AudioPlayer.module.scss'
 import { AiFillCaretRight, AiFillStepForward, AiOutlinePause } from 'react-icons/ai'
 import { FaShuffle } from 'react-icons/fa6'
 import { getFieNameFromPath } from '../../functions/getFieNameFromPath'
+import { getTimeFormat } from '../../functions/getTimeFormat'
 
 type PropsType = {
 	playlists: PlaylistsType
@@ -17,6 +18,9 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 	const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0)
 	const [isPlaying, setIsPlaying] = useState<boolean>(false)
 	const [isRandom, setIsRandom] = useState<boolean>(true)
+	const [currentTime, setCurrentTime] = useState<number>(0)
+	const [duration, setDuration] = useState<number>(0)
+
 	const audioRef = useRef<HTMLAudioElement>(null)
 
 	useEffect(() => {
@@ -81,6 +85,24 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 		setIsRandom(!isRandom)
 	}
 
+	const handleTimeUpdate = () => {
+		if (audioRef.current) {
+			setCurrentTime(audioRef.current.currentTime)
+		}
+	}
+
+	const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (audioRef.current) {
+			audioRef.current.currentTime = parseFloat(e.target.value)
+		}
+	}
+
+	const handleMetadata = () => {
+		if (audioRef.current) {
+			setDuration(audioRef.current.duration)
+		}
+	}
+
 	return (
 		<div>
 			<h1 className={s.h1}>D&D Audio Player</h1>
@@ -93,7 +115,23 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 				{playlists[currentPlaylist] && (
 					<div className={s.track}>
 						{playlists[currentPlaylist].image &&<img className={s.track_image} src={playlists[currentPlaylist].image} />}
+						<div className={s.track_info}>
 						<div className={s.track_title}>{getFieNameFromPath(playlists[currentPlaylist].tracks[currentTrackIndex])}</div>
+							<div className={s.track_progress}>
+								<div className={s.track_time}>
+									<span>{getTimeFormat(currentTime)}</span>
+									<span>{getTimeFormat(duration)}</span>
+								</div>
+								<input
+									type="range"
+									className={s.track_range}
+									value={currentTime || 0}
+									onChange={handleSeek}
+									min="0"
+									max={duration}
+								/>
+							</div>
+						</div>
 					</div>
 				)}
 				<button className={[s.button, isRandom ? s.button_active : ''].join(' ')} onClick={handleChangeRandom}><FaShuffle className={s.icon} /></button>
@@ -102,6 +140,9 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 				ref={audioRef}
 				src={playlists[currentPlaylist].tracks[currentTrackIndex]}
 				onEnded={handleNextTrack}
+				onTimeUpdate={handleTimeUpdate}
+				onLoadedMetadata={handleMetadata}
+				preload="metadata"
 			/>
 		</div>
 	)

@@ -1,4 +1,4 @@
-import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"
+import { AiFillPlayCircle, AiOutlinePauseCircle } from "react-icons/ai"
 import s from './TrackItem.module.scss'
 import { getFieNameFromPath } from "../../../../functions/getFieNameFromPath"
 
@@ -14,7 +14,7 @@ export const TrackItem: React.FC<PropsType> = ({path, selected, onClickPlay, onP
 		<div className={s.container}>
 			<div className={s.button} onClick={selected ? onPause : onClickPlay}>
 				{!selected &&	<AiFillPlayCircle className={s.icon} />}
-				{selected && <AiFillPauseCircle className={s.icon} />}
+				{selected && <AiOutlinePauseCircle className={s.icon} />}
 			</div>
 			<div className={s.name}>{getFieNameFromPath(path)}</div>
 		</div>

@@ -2,9 +2,13 @@
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	padding: 5px 10px;
-	border-radius: var(--border-radius);
-	border: 1px solid var(--border-color);
+	border-top: 1px solid var(--border-color);
+	padding: 5px 0;
+
+	&:first-child {
+		border-top: none;
+		padding-top: 0;
+	}
 }
 
 .button {
@@ -13,8 +17,8 @@
 }
 
 .icon {
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	color: var(--main-color);
 	flex-shrink: 0;
 
@@ -24,5 +28,6 @@
 }
 
 .name {
+	font-size: var(--font-size-xs);
 	font-weight: 500;
 }

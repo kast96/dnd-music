@@ -1,17 +1,14 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
-	width: 360px;
-	padding: var(--padding-block);
+	width: 200px;
 	border-radius: var(--border-radius);
-	border: 1px solid var(--border-color);
-}
+	background-color: var(--background-color-block);
+	overflow: hidden;
 
-.title {
-	font-size: var(--font-size-lg);
-	font-weight: 600;
-	text-align: center;
+	&_selected {
+		box-shadow: var(--box-shadow);
+	}
 }
 
 .image {
@@ -21,6 +18,16 @@
 	border-radius: var(--border-radius);
 	overflow: hidden;
 	cursor: pointer;
+
+	&:hover::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0,0,0,.3);
+	}
 }
 
 .picture {
@@ -34,32 +41,51 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 80px;
-	height: 80px;
-	color: var(--main-color);
-	background-color: #fff;
-	border-radius: 50%;
-	box-shadow: 0 0 10px #000;
+	width: 50px;
+	height: 50px;
+	color: var(--text-color);
+	opacity: 0;
 }
 
 .image:hover .icon {
-	color: var(--main-color-darken);
+	opacity: 1;
+}
+
+.title {
+	font-size: var(--font-size);
+	font-weight: 600;
+	text-align: center;
+}
+
+.content {
+	padding: 20px;
 }
 
 .tracks_header {
 	display: flex;
-	justify-content: space-between;
-	gap: 20px;
-	padding-top: 20px;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	padding-top: 10px;
 	cursor: pointer;
 
 	&_title {
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: 400;
+		color: var(--text-color-muted);
 	}
 
 	&_icon {
 		display: flex;
+		color: var(--text-color-muted);
+		width: 10px;
+		height: 10px;
 		flex-shrink: 0;
+	}
+
+	&:hover &_title,
+	&:hover &_icon {
+		color: var(--text-color);
 	}
 }
 
@@ -70,7 +96,6 @@
 .tracks {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
 	margin-top: 20px;
 	max-height: 400px;
 	overflow: auto;

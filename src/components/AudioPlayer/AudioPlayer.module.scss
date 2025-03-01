@@ -30,23 +30,24 @@
 	border: 1px solid var(--border-color);
 	border-radius: var(--border-radius);
 	padding: 10px;
-	background: none;
+	background-color: var(--background-color-block);
 	color: inherit;
 	font: inherit;
 	outline: inherit;
 	cursor: pointer;
 
 	&_active {
-		color: var(--main-color);
+		box-shadow: var(--box-shadow);
+		border-color: var(--border-color-active);
 	}
 
 	&:hover {
 		color: #fff;
-		background-color: var(--main-color);
+		background-color: rgba(0,0,0,.1);
 	}
 
 	&:active {
-		background-color: var(--main-color-darken);
+		background-color: rgba(0,0,0,.3);
 	}
 }
 
@@ -68,7 +69,65 @@
 		border-radius: var(--border-radius);
 	}
 
+	&_info {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		width: 100%;
+	}
+
 	&_title {
 		font-weight: 600;
+	}
+
+	&_progress {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	&_time {
+		display: flex;
+		justify-content: space-between;
+		font-size: var(--font-size-xs);
+		font-weight: 400;
+		color: var(--text-color-muted);
+	}
+
+	&_range {
+		width: 100%;
+		height: 10px;
+		margin: 5px 0;
+		appearance: none;
+		background: transparent;
+		cursor: pointer;
+
+		&::-webkit-slider-runnable-track {
+			background: var(--background-color-track);
+			height: 100%;
+		}
+
+		&::-moz-range-track {
+			background: var(--background-color-track);
+			height: 100%;
+		}
+
+		&::-webkit-slider-thumb {
+			appearance: none;
+			margin-top: -2px;
+			background-color: var(--track-color);
+			height: calc(100% + 4px);
+			width: 20px;
+			border-radius: 2px;
+		}
+
+		&::-moz-range-thumb {
+			appearance: none;
+			margin-top: -5px;
+			background-color: var(--main-color);
+			height: 14px;
+			width: 14px;
+			border-radius: 50%;
+		}
 	}
 }
