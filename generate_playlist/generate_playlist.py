@@ -2,21 +2,24 @@ import os
 import json
 
 # Путь к папке с плейлистами
+PUBLIC_DIR = "public"
+
+# Путь к папке с плейлистами
 PLAYLISTS_DIR = "playlists"
 
 # Путь к выходному файлу
-OUTPUT_FILE = "playlists.json"
+OUTPUT_FILE = PUBLIC_DIR + "/playlists.json"
 
 # Функция для сканирования папки с плейлистами
 def scan_playlists(directory):
 	playlists = []
 
 	# Проходим по всем подпапкам в папке playlists
-	for playlist_name in os.listdir(directory):
+	for playlist_name in os.listdir(PUBLIC_DIR + '/' + directory):
 		playlist_path = os.path.join(directory, playlist_name)
 
 		# Проверяем, что это папка
-		if os.path.isdir(playlist_path):
+		if os.path.isdir(PUBLIC_DIR + '/' + playlist_path):
 			playlist_data = {
 				"name": playlist_name,
 				"image": None,
@@ -24,7 +27,7 @@ def scan_playlists(directory):
 			}
 
 			# Сканируем файлы в подпапке
-			for file_name in os.listdir(playlist_path):
+			for file_name in os.listdir(PUBLIC_DIR + '/' + playlist_path):
 				file_path = os.path.join(playlist_path, file_name)
 
 				# Если это изображение
