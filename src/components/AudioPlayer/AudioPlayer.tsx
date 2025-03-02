@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { PlaylistsType } from '../../types/types'
 import { Playlist } from './Plyaylist/Plyaylist'
 import s from './AudioPlayer.module.scss'
-import { AiFillCaretRight, AiFillStepForward, AiOutlinePause } from 'react-icons/ai'
+import { AiFillCaretRight, AiFillSound, AiFillStepForward, AiOutlinePause } from 'react-icons/ai'
 import { FaShuffle } from 'react-icons/fa6'
 import { getFieNameFromPath } from '../../functions/getFieNameFromPath'
 import { getTimeFormat } from '../../functions/getTimeFormat'
@@ -20,8 +20,18 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 	const [isRandom, setIsRandom] = useState<boolean>(true)
 	const [currentTime, setCurrentTime] = useState<number>(0)
 	const [duration, setDuration] = useState<number>(0)
+	const [volume, setVolume] = useState<number>(() => {
+		const savedVolume = localStorage.getItem('audioPlayerVolume')
+		return savedVolume ? parseFloat(savedVolume) : 1.0
+	})
 
 	const audioRef = useRef<HTMLAudioElement>(null)
+
+	useEffect(() => {
+		if (audioRef.current) {
+			audioRef.current.volume = volume
+		}
+	}, [volume])
 
 	useEffect(() => {
 		if (audioRef.current) {
@@ -103,6 +113,12 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 		}
 	}
 
+	const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newVolume = parseFloat(e.target.value)
+		setVolume(newVolume)
+		localStorage.setItem('audioPlayerVolume', newVolume.toString())
+	}
+
 	return (
 		<div>
 			<h1 className={s.h1}>D&D Audio Player</h1>
@@ -124,7 +140,7 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 								</div>
 								<input
 									type="range"
-									className={s.track_range}
+									className={s.range}
 									value={currentTime || 0}
 									onChange={handleSeek}
 									min="0"
@@ -135,6 +151,18 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 					</div>
 				)}
 				<button className={[s.button, isRandom ? s.button_active : ''].join(' ')} onClick={handleChangeRandom}><FaShuffle className={s.icon} /></button>
+				<div className={s.volume}>
+					<AiFillSound className={s.volume_icon} />
+					<input
+						type="range"
+						min="0"
+						max="1"
+						step="0.01"
+						value={volume}
+						onChange={handleVolumeChange}
+						className={s.range}
+					/>
+				</div>
 			</div>
 			<audio
 				ref={audioRef}
