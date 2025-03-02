@@ -1,60 +1,56 @@
-import { useEffect, useState } from "react"
-import { playlists as playlistsData } from "./data/playlists/playlists"
-import { PlaylistsType, ImportItemsType } from "./types/types"
-import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer"
-
-const importItems: ImportItemsType = import.meta.glob('./data/playlists/**/*.(mp3)') as ImportItemsType
-const importImages: ImportItemsType = import.meta.glob('./data/playlists/**/(image.jpeg)') as ImportItemsType
+import { useEffect, useState } from "react";
+import { PlaylistsType } from "./types/types";
+import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
 
 function App() {
-	let [playlists, setPlaylist] = useState<PlaylistsType>()
+	const [playlists, setPlaylists] = useState<PlaylistsType | null>(null);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-    const loadFiles = async () => {
-      const musicFiles: { [key: string]: string } = {}
-      const imageFiles: { [key: string]: string } = {}
+		// Загружаем playlists.json из публичной папки
+		const loadPlaylists = async () => {
+			try {
+				const response = await fetch("/playlists.json");
+				if (!response.ok) {
+					throw new Error("Не удалось загрузить плейлисты");
+				}
+				const data = await response.json();
 
-      for (const [path, importFn] of Object.entries(importItems)) {
-        const file = await importFn()
-        musicFiles[path] = file.default
-      }
+				// Преобразуем данные в нужный формат
+				const formattedPlaylists = data.reduce((acc: PlaylistsType, playlist: any) => {
+					acc[playlist.name] = {
+						name: playlist.name,
+						image: playlist.image,
+						tracks: playlist.tracks,
+					};
+					return acc;
+				}, {});
 
-      for (const [path, importFn] of Object.entries(importImages)) {
-        const file = await importFn()
-        imageFiles[path] = file.default
-      }
+				setPlaylists(formattedPlaylists);
+			} catch (err) {
+				setError(err instanceof Error ? err.message : "Произошла ошибка");
+			} finally {
+				setLoading(false);
+			}
+		};
 
-			const playlists = Object.fromEntries(
-				Object.entries(playlistsData).map(([key, value]) => {
-					return [
-						key,
-						{
-							...value,
-							image: imageFiles[`./data/playlists/${key}/image.jpeg`],
-							tracks: Object.entries(musicFiles).map(([path, file]) => {
-								return path.startsWith(`./data/playlists/${key}/`) ? file : ''
-							}).filter(file => file !== '')
-						}
-					]
-				})
-			)
-			
-			setPlaylist(playlists)
-    }
+		loadPlaylists();
+	}, []);
 
-    loadFiles()
-  }, [])
+	if (loading) {
+		return <div>Загрузка...</div>;
+	}
+
+	if (error) {
+		return <div>Ошибка: {error}</div>;
+	}
 
 	return (
 		<>
-			{!playlists && 'Loading...'}
-			{playlists && (
-				<>
-					<AudioPlayer playlists={playlists} />
-				</>
-			)}
+			{playlists && <AudioPlayer playlists={playlists} />}
 		</>
 	)
 }
 
-export default App
+export default App;

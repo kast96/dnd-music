@@ -1,0 +1,17 @@
+[
+    {
+        "name": "city",
+        "image": "playlists\\city\\image.jpeg",
+        "tracks": [
+            "playlists\\city\\Стены Крагера 2.mp3",
+            "playlists\\city\\Стены Крагера.mp3"
+        ]
+    },
+    {
+        "name": "fight",
+        "image": "playlists\\fight\\image.jpeg",
+        "tracks": [
+            "playlists\\fight\\Сделка.mp3"
+        ]
+    }
+]
