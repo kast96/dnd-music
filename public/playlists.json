@@ -1,17 +1,61 @@
 [
-    {
-        "name": "city",
-        "image": "playlists\\city\\image.jpeg",
-        "tracks": [
-            "playlists\\city\\Стены Крагера 2.mp3",
-            "playlists\\city\\Стены Крагера.mp3"
-        ]
-    },
-    {
-        "name": "fight",
-        "image": "playlists\\fight\\image.jpeg",
-        "tracks": [
-            "playlists\\fight\\Сделка.mp3"
-        ]
-    }
+  {
+    "name": "Бой",
+    "image": "playlists/Бой/image.jpg",
+    "tracks": [
+      "playlists/Бой/Ancestors - Wrath of Perun extended - Ancestors - Wrath of Perun extended.mp3",
+      "playlists/Бой/Baldur's Gate 3 - Battle Music 3.mp3",
+      "playlists/Бой/Baldur's Gate 3 - Fight Theme 9.16.mp3",
+      "playlists/Бой/Darkest Dungeon - The Cove Battle Siren.mp3",
+      "playlists/Бой/Neverwinter Nights 2 - Combat Theme, King of Shadows.mp3",
+      "playlists/Бой/Neverwinter Nights 2 - Combat Theme, West Harbor.mp3",
+      "playlists/Бой/Neverwinter Nights 2 - Атака мертвецов.mp3",
+      "playlists/Бой/Witcher 3 OST - Hunt or be Hunted.mp3"
+    ]
+  },
+  {
+    "name": "Город",
+    "image": null,
+    "tracks": [
+      "playlists/Город/Breakdown Epiphanies - Mercenary's Rest.mp3",
+      "playlists/Город/Derek Brandon Fiechter - Knights of Blackhall.mp3",
+      "playlists/Город/Medieval Music - Sir Hector de Maris.mp3",
+      "playlists/Город/Stronghold 2 - Harpy 2.mp3",
+      "playlists/Город/Stronghold 2 - two mandolins.mp3"
+    ]
+  },
+  {
+    "name": "Напряженная",
+    "image": "playlists/Напряженная/image.jpg",
+    "tracks": [
+      "playlists/Напряженная/Neverwinter Nights 2 - Murder.mp3",
+      "playlists/Напряженная/Neverwinter Nights 2 - Surrounded by Darkness.mp3"
+    ]
+  },
+  {
+    "name": "Путешествие",
+    "image": "playlists/Путешествие/image.jpg",
+    "tracks": [
+      "playlists/Путешествие/Baldur's Gate 3 - Down By The River.mp3",
+      "playlists/Путешествие/Baldur's Gate 3 - The Power.mp3",
+      "playlists/Путешествие/Borislav Slavov - Rivellon.mp3",
+      "playlists/Путешествие/Breakdown Epiphanies - Alleys of Weissenhaven.mp3",
+      "playlists/Путешествие/Jeremy Soule - Dusk at the Market.mp3",
+      "playlists/Путешествие/Jeremy Soule - The City Gates.mp3",
+      "playlists/Путешествие/Jeremy Soule - The Streets of Whiterun.mp3",
+      "playlists/Путешествие/Jeremy Soule, Julian Soule - Harvest Dawn.mp3",
+      "playlists/Путешествие/Paul Romero - Hope.mp3"
+    ]
+  },
+  {
+    "name": "Эпическая",
+    "image": null,
+    "tracks": [
+      "playlists/Эпическая/Death of Hope - Fall of a Titan.mp3",
+      "playlists/Эпическая/Warhammer 40k - Angels Of Death.mp3",
+      "playlists/Эпическая/Warhammer 40k - Dark Angels Crusade.mp3",
+      "playlists/Эпическая/Warhammer 40k - Imperial Creed.mp3",
+      "playlists/Эпическая/Warhammer 40k - Khaine's Wrath.mp3"
+    ]
+  }
 ]
