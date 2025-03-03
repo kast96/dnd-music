@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "generate-playlists": "node generatePlaylists.js",
+    "dev": "npm run generate-playlists && vite",
+    "build": "npm run generate-playlists && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
