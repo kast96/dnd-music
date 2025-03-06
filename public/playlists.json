@@ -3,7 +3,7 @@
     "name": "Бой",
     "image": "playlists/Бой/image.jpg",
     "tracks": [
-      "playlists/Бой/Ancestors - Wrath of Perun extended - Ancestors - Wrath of Perun extended.mp3",
+      "playlists/Бой/Ancestors - Wrath of Perun extended.mp3",
       "playlists/Бой/Baldur's Gate 3 - Battle Music 3.mp3",
       "playlists/Бой/Baldur's Gate 3 - Fight Theme 9.16.mp3",
       "playlists/Бой/Darkest Dungeon - The Cove Battle Siren.mp3",
@@ -15,13 +15,26 @@
   },
   {
     "name": "Город",
-    "image": null,
+    "image": "playlists/Город/image.jpg",
     "tracks": [
       "playlists/Город/Breakdown Epiphanies - Mercenary's Rest.mp3",
       "playlists/Город/Derek Brandon Fiechter - Knights of Blackhall.mp3",
+      "playlists/Город/Hoity-Toity - Stella Splendens.mp3",
+      "playlists/Город/IkuinenOnni - HOMM 4 Order theme.mp3",
       "playlists/Город/Medieval Music - Sir Hector de Maris.mp3",
       "playlists/Город/Stronghold 2 - Harpy 2.mp3",
       "playlists/Город/Stronghold 2 - two mandolins.mp3"
+    ]
+  },
+  {
+    "name": "Космос",
+    "image": "playlists/Космос/image.jpg",
+    "tracks": [
+      "playlists/Космос/NiKiNiT - Illusion.mp3",
+      "playlists/Космос/NiKiNiT - Star Trooper.mp3",
+      "playlists/Космос/NiKiNiT - Две звезды.mp3",
+      "playlists/Космос/NiKiNiT - Квазар.mp3",
+      "playlists/Космос/The Isolated Vale - Icewind Dale.mp3"
     ]
   },
   {
@@ -49,8 +62,11 @@
   },
   {
     "name": "Эпическая",
-    "image": null,
+    "image": "playlists/Эпическая/image.jpg",
     "tracks": [
+      "playlists/Эпическая/Attack on Titan - Levi Ackerman Epic Theme.mp3",
+      "playlists/Эпическая/Attack on Titan - Vogel im Kafig.mp3",
+      "playlists/Эпическая/Death Note - Death Theme.mp3",
       "playlists/Эпическая/Death of Hope - Fall of a Titan.mp3",
       "playlists/Эпическая/Warhammer 40k - Angels Of Death.mp3",
       "playlists/Эпическая/Warhammer 40k - Dark Angels Crusade.mp3",
