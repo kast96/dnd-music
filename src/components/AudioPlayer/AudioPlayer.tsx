@@ -4,7 +4,7 @@ import { Playlist } from './Plyaylist/Plyaylist'
 import s from './AudioPlayer.module.scss'
 import { AiFillCaretRight, AiFillSound, AiFillStepForward, AiOutlinePause } from 'react-icons/ai'
 import { FaShuffle } from 'react-icons/fa6'
-import { getFieNameFromPath } from '../../functions/getFieNameFromPath'
+import { getFileNameFromPath } from '../../functions/getFileNameFromPath'
 import { getTimeFormat } from '../../functions/getTimeFormat'
 
 type PropsType = {
@@ -132,7 +132,7 @@ export const AudioPlayer: React.FC<PropsType> = ({playlists}) => {
 					<div className={s.track}>
 						{playlists[currentPlaylist].image &&<img className={s.track_image} src={playlists[currentPlaylist].image} />}
 						<div className={s.track_info}>
-						<div className={s.track_title}>{getFieNameFromPath(playlists[currentPlaylist].tracks[currentTrackIndex])}</div>
+						<div className={s.track_title}>{getFileNameFromPath(playlists[currentPlaylist].tracks[currentTrackIndex])}</div>
 							<div className={s.track_progress}>
 								<div className={s.track_time}>
 									<span>{getTimeFormat(currentTime)}</span>
