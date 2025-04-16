@@ -1,3 +1,19 @@
+import { ComponentType } from "react"
+
+export type RoutersType = {
+	[key: string]: {
+		path: string
+		title: string
+		Component: ComponentType<{}>
+		hideMenu?: boolean
+		menuImage?: string
+	}
+}
+
+export type SetTitleType = {
+	setTitle?: (title: string) => void
+}
+
 export type PlaylistsDataType = {
 	[key: string]: {
 		name: string
