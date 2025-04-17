@@ -36,6 +36,18 @@ export type BattleCalcInputsType = {
 }
 
 export type BattleCalcPalyerType = {
+	name?: string
 	hp: number
 	armor: number
+	strength?: number
+	dexterity?: number
+	constitution?: number
+	intelligence?: number
+	wisdom?: number
+	charisma?: number
+}
+
+export type CharacteristicType = {
+	id: 'strength' | 'dexterity' | 'constitution' |	'intelligence' | 'wisdom' | 'charisma'
+	name: string
 }

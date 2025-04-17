@@ -8,13 +8,20 @@ type PropsType = {
 	register: UseFormRegister<BattleCalcInputsType>
 	players: Array<BattleCalcPalyerType>
 	addPlayer: () => void
-	removePlayer: (index: number) => () => void
+	removePlayer: (index: number) => void
 }
 
 export const Players: FC<PropsType> = ({register, players, addPlayer, removePlayer}) => {
 	return (
 		<div className={s.container}>
-			{players.map((player, key) => <Player register={register} key={key} index={key} remove={removePlayer(key)} player={player} />)}
+			{players.map((_, index) => (
+				<Player 
+					register={register} 
+					key={index} 
+					index={index} 
+					remove={() => removePlayer(index)} 
+				/>
+			))}
 			<button className={s.add} onClick={addPlayer}>+</button>
 		</div>
 	)
