@@ -30,3 +30,12 @@ export type PlaylistsType = {
 }
 
 export type ImportItemsType = Record<string, () => Promise<{ default: string }>>
+
+export type BattleCalcInputsType = {
+	players: Array<BattleCalcPalyerType>
+}
+
+export type BattleCalcPalyerType = {
+	hp: number
+	armor: number
+}

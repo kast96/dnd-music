@@ -1,0 +1,30 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	gap: 40px;
+}
+
+.add {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 200px;
+	min-height: 300px;
+	padding: 20px;
+	border-radius: var(--border-radius);
+	background-color: var(--background-color);
+	border: 1px solid var(--border-color);
+	color: var(--text-color-muted);
+	font-weight: 400;
+	font-size: 64px;
+	cursor: pointer;
+
+	&:hover {
+		color: var(--text-color);
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow-lg);
+    border-color: var(--main-color);
+	}
+}
