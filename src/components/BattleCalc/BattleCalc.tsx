@@ -1,4 +1,4 @@
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form"
 import s from './BattleCalc.module.scss'
 import { Players } from "./Players/Players"
 import { BattleCalcInputsType } from "../../types/types"

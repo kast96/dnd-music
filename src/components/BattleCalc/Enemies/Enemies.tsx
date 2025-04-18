@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import { Enemy } from './Enemy/Enemy'
 import s from './Enemies.module.scss'
-import { BattleCalcInputsType, BattleCalcEnemyType } from '../../../types/types'
+import { BattleCalcInputsType, FighterCalcPlayerType } from '../../../types/types'
 import { UseFormRegister } from 'react-hook-form'
 
 type PropsType = {
 	register: UseFormRegister<BattleCalcInputsType>
-	enemies: Array<BattleCalcEnemyType>
+	enemies: Array<FighterCalcPlayerType>
 	add: () => void
 	remove: (index: number) => void
 }
