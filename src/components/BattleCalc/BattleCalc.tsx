@@ -2,43 +2,66 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
 import s from './BattleCalc.module.scss'
 import { Players } from "./Players/Players"
 import { BattleCalcInputsType } from "../../types/types"
+import { Enemies } from "./Enemies/Enemies"
+import { calcBattle } from "../../functions/calcBattle"
 
 export const BattleCalc = () => {
-	const playersDefaultValues = {
-		hp: 0,
-		armor: 0
+	const defaultValues = {
+		players: {
+			hp: 0,
+			armor: 0,
+			initiative: 0
+		},
+		enemies: {
+			hp: 0,
+			armor: 0,
+			initiative: 0
+		}
 	}
 
-	const { register, handleSubmit, control } = useForm<BattleCalcInputsType>({
+	const { register, control, watch, handleSubmit } = useForm<BattleCalcInputsType>({
 		defaultValues: {
-			players: [playersDefaultValues]
+			players: [defaultValues.players],
+			enemies: [defaultValues.enemies]
 		}
 	})
 
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: 'players'
-	})
+	const { fields: playerFields, append: playerAppend, remove: playerRemove } = useFieldArray({ control, name: 'players' })
+	const { fields: enemyFields, append: enemyAppend, remove: enemyRemove } = useFieldArray({ control, name: 'enemies' })
 
 	const addPlayer = () => {
-		append(playersDefaultValues)
+		playerAppend(defaultValues.players)
 	}
 
-	const onSubmit: SubmitHandler<BattleCalcInputsType> = (data) => {
-		console.log(data)
+	const addEnemy = () => {
+		enemyAppend(defaultValues.enemies)
 	}
+
+	const result = calcBattle(watch())
+
+	console.log(result)
 	
 	return (
 		<div className={s.container}>
-			<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-				<h2 className={s.title}>Игроки</h2>
-				<Players 
-					register={register} 
-					players={fields} 
-					addPlayer={addPlayer} 
-					removePlayer={remove} 
-				/>
-				<input type="submit" />
+			<form className={s.form} onSubmit={handleSubmit(() => false)}>
+				<div className={s.block}>
+					<h2 className={s.title}>Игроки</h2>
+					<Players 
+						register={register} 
+						players={playerFields} 
+						add={addPlayer} 
+						remove={playerRemove} 
+					/>
+				</div>
+				<div className={s.block}>
+					<h2 className={s.title}>Враги</h2>
+					<Enemies
+						register={register} 
+						enemies={enemyFields} 
+						add={addEnemy} 
+						remove={enemyRemove} 
+					/>
+				</div>
 			</form>
 		</div>
 	)

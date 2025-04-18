@@ -1,21 +1,21 @@
 import { FC } from 'react'
-import { Player } from './Player/Player'
-import s from './Players.module.scss'
-import { BattleCalcInputsType, BattleCalcPalyerType } from '../../../types/types'
+import { Enemy } from './Enemy/Enemy'
+import s from './Enemies.module.scss'
+import { BattleCalcInputsType, BattleCalcEnemyType } from '../../../types/types'
 import { UseFormRegister } from 'react-hook-form'
 
 type PropsType = {
 	register: UseFormRegister<BattleCalcInputsType>
-	players: Array<BattleCalcPalyerType>
+	enemies: Array<BattleCalcEnemyType>
 	add: () => void
 	remove: (index: number) => void
 }
 
-export const Players: FC<PropsType> = ({register, players, add, remove}) => {
+export const Enemies: FC<PropsType> = ({register, enemies, add, remove}) => {
 	return (
 		<div className={s.container}>
-			{players.map((_, index) => (
-				<Player
+			{enemies.map((_, index) => (
+				<Enemy 
 					register={register}
 					key={index}
 					index={index}
