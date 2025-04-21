@@ -8,7 +8,7 @@ type PropsType = {
 	title: string
 }
 
-export const Header: FC<PropsType> = ({title}) => {
+export const Header: FC<PropsType> = ({}) => {
 	return (
 		<header className={s.header}>
 			<div className={s.logo}>
