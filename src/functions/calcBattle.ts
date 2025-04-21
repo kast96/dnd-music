@@ -1,7 +1,7 @@
 import { BattleCalcInputsType, FighterCalcPlayerType } from "../types/types"
 import { getDiceResult } from "./getDiceResult"
 
-export const calcBattle = ({ players, enemies }: BattleCalcInputsType) => {
+export const calcBattle = ({ players, enemies }: BattleCalcInputsType, simulationCount: number) => {
 	let result = {
 		playersStartHp: getFighterSumHp(players),
 		enemiesStartHp: getFighterSumHp(enemies),
@@ -11,12 +11,16 @@ export const calcBattle = ({ players, enemies }: BattleCalcInputsType) => {
 		defeatCount: 0,
 	}
 
-	for (let simulationCount = 0; simulationCount < 100; simulationCount++) {
+	for (let simulationIndex = 0; simulationIndex < simulationCount; simulationIndex++) {
 		let isFinish = false
 
 		let fighters = {
-			players: players.map(player => ({ ...player })),
-			enemies: enemies.map(enemy => ({ ...enemy }))
+			players: players.flatMap(({ count, ...fighter }) => 
+				Array.from({ length: count === undefined || count < 1 ? 1 : count }, () => ({ ...fighter }))
+			),
+			enemies: enemies.flatMap(({ count, ...fighter }) => 
+				Array.from({ length: count === undefined || count < 1 ? 1 : count }, () => ({ ...fighter }))
+			)
 		}
 
 		const initiatives = (Object.keys(fighters) as Array<keyof typeof fighters>).flatMap(type => 
@@ -45,13 +49,14 @@ export const calcBattle = ({ players, enemies }: BattleCalcInputsType) => {
 					if (isFinish) return
 
 					const isPlayer = initiative.type == 'players'
-					const attacedFighter = fighters[isPlayer ? 'enemies' : 'players'].reduce((prev, fighter) => {
+					const availableFighters = fighters[isPlayer ? 'enemies' : 'players'].filter(fighter => fighter.hp > 0)
+					const attackedFighter = availableFighters.length > 1 ? availableFighters.reduce((prev, fighter) => {
 						if (fighter.hp <= 0) return prev
 
 						return isPlayer ? (fighter.hp < prev.hp ? fighter : prev) : (fighter.hp > prev.hp ? fighter : prev)
-					})
+					}) : availableFighters.shift();
 
-					if (attacedFighter.hp <= 0)
+					if (!attackedFighter || attackedFighter.hp <= 0)
 					{
 						isFinish = true
 						return
@@ -60,7 +65,7 @@ export const calcBattle = ({ players, enemies }: BattleCalcInputsType) => {
 					//console.log(fighter.name, 'атакует', attacedFighter.name, 'оружием', damage)
 					
 					let attackResult = getDiceResult(20) + (fighter.strength || 0)
-					if (attackResult < attacedFighter.armor) {
+					if (attackResult < attackedFighter.armor) {
 						//console.log(attackResult, '<', attacedFighter.armor, '- промах')
 						return
 					}
@@ -89,8 +94,8 @@ export const calcBattle = ({ players, enemies }: BattleCalcInputsType) => {
 
 					//console.log('Здоровье: ', attacedFighter.hp, '-', damageResult, '=', attacedFighter.hp - damageResult)
 					
-					attacedFighter.hp -= damageResult
-					if (attacedFighter.hp < 0) attacedFighter.hp = 0
+					attackedFighter.hp -= damageResult
+					if (attackedFighter.hp < 0) attackedFighter.hp = 0
 				})
 			}
 		}
@@ -98,8 +103,8 @@ export const calcBattle = ({ players, enemies }: BattleCalcInputsType) => {
 		let playersHp = getFighterSumHp(fighters.players)
 		let enemiesHp = getFighterSumHp(fighters.enemies)
 		
-		result.playersHp = simulationCount ? (result.playersHp + playersHp) / 2 : playersHp
-		result.enemiesHp = simulationCount ? (result.enemiesHp + enemiesHp) / 2 : enemiesHp
+		result.playersHp = simulationIndex ? (result.playersHp + playersHp) / 2 : playersHp
+		result.enemiesHp = simulationIndex ? (result.enemiesHp + enemiesHp) / 2 : enemiesHp
 		
 		if (enemiesHp <= 0) result.winCount++
 		if (playersHp <= 0) result.defeatCount++

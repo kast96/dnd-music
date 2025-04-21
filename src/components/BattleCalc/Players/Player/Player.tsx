@@ -18,22 +18,22 @@ export const Player: FC<PropsType> = ({register, index, remove}) => {
 			<div className={s.header}>
 				<div className={s.header_item}>
 					<FaHeart className={s.header_icon} />
-					<input className={[s.header_input, 'input'].join(' ')} {...register(`players.${index}.hp`, { required: true, min: 1, setValueAs: (value) => parseInt(value) || 0 })} placeholder='0' />
+					<input className={[s.header_input, 'input'].join(' ')} {...register(`players.${index}.hp`, { required: true, min: 1, setValueAs: (value) => +value || 0 })} placeholder='0' />
 				</div>
 				<div className={s.header_item}>
 					<FaShield className={s.header_icon} />
-					<input className={[s.header_input, 'input'].join(' ')} {...register(`players.${index}.armor`, { required: true, min: 1, setValueAs: (value) => parseInt(value) || 0 })} placeholder='0' />
+					<input className={[s.header_input, 'input'].join(' ')} {...register(`players.${index}.armor`, { required: true, min: 1, setValueAs: (value) => +value || 0 })} placeholder='0' />
 				</div>
 			</div>
 			<div className={s.initiative}>
 				<span className={s.initiative_name}>Инициатива</span>
-				<input className={[s.initiative_input, 'input input-border'].join(' ')} {...register(`players.${index}.initiative`, { min: 1, setValueAs: (value) => parseInt(value) || 0 })} placeholder='0' />
+				<input className={[s.initiative_input, 'input input-border'].join(' ')} {...register(`players.${index}.initiative`, { min: 1, setValueAs: (value) => +value || 0 })} placeholder='0' />
 			</div>
 			<div className={s.characteristics}>
 				{characteristics.map(characteristic => (
 					<div className={s.characteristic} key={characteristic.id}>
 						<span className={s.characteristic_name}>{characteristic.name}</span>
-						<input className={[s.characteristic_input, 'input input-border'].join(' ')} {...register(`players.${index}.${characteristic.id}`, { min: 1, setValueAs: (value) => parseInt(value) || 0 })} placeholder='0' />
+						<input className={[s.characteristic_input, 'input input-border'].join(' ')} {...register(`players.${index}.${characteristic.id}`, { min: 1, setValueAs: (value) => +value || 0 })} placeholder='0' />
 					</div>
 				))}
 			</div>

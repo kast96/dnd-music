@@ -52,6 +52,7 @@ export type FighterCalcPlayerType = {
 	initiative: number
 	attack1?: string
 	attack2?: string
+	count?: number
 } & CharacteristicListType
 
 export type DiceFaces = typeof availableFaces[number]

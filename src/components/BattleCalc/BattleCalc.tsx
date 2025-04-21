@@ -37,7 +37,7 @@ export const BattleCalc = () => {
 		enemyAppend(defaultValues.enemies)
 	}
 
-	const result = calcBattle(watch())
+	const result = calcBattle(watch(), 1000)
 	
 	return (
 		<div className={s.container}>
@@ -62,11 +62,26 @@ export const BattleCalc = () => {
 				</div>
 			</form>
 			{result && (
-				<div className={s.total}>
-					<div className={s.total_wins}>Побед/Поражений: {result.winCount}/{result.defeatCount}</div>
-					<div className={s.total_precent}>Процент на победу: {Math.round(result.winCount / (result.winCount + result.defeatCount) * 100)}%</div>
-					<div className={s.total_hp}>Среднее HP игроков: {result.playersStartHp} - {Math.round(result.playersStartHp - result.playersHp)} = {Math.round(result.playersHp)}</div>
-					<div className={s.total_hp}>Среднее HP врагов: {result.enemiesStartHp} - {Math.round(result.enemiesStartHp - result.enemiesHp)} = {Math.round(result.enemiesHp)}</div>
+				<div className={s.block}>
+					<h2 className={s.title}>Результат симуляции боев</h2>
+					<div className={s.total}>
+						<div className={s.total_property}>
+							<span className={s.total_property_name}>Побед/Поражений:</span>
+							<span className={s.total_property_value}>{result.winCount}/{result.defeatCount}</span>
+						</div>
+						<div className={s.total_property}>
+							<span className={s.total_property_name}>Процент побед:</span>
+							<span className={s.total_property_value}>{Math.round(result.winCount / (result.winCount + result.defeatCount) * 100)}%</span>
+						</div>
+						<div className={s.total_property}>
+							<span className={s.total_property_name}>Среднее оставщееся HP игроков:</span>
+							<span className={s.total_property_value}>{Math.round(result.playersHp)}</span>
+						</div>
+						<div className={s.total_property}>
+							<span className={s.total_property_name}>Среднее оставщееся HP врагов:</span>
+							<span className={s.total_property_value}>{Math.round(result.enemiesHp)}</span>
+						</div>
+					</div>
 				</div>
 			)}
 		</div>
