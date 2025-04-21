@@ -3,6 +3,7 @@ import { UseFormRegister } from 'react-hook-form'
 import { BattleCalcInputsType } from '../../../../types/types'
 import { FaHeart, FaShield } from 'react-icons/fa6'
 import { FC } from 'react'
+import { characteristics } from '../../../../data/characteristics'
 
 type PropsType = {
 	register: UseFormRegister<BattleCalcInputsType>
@@ -27,6 +28,14 @@ export const Enemy: FC<PropsType> = ({register, index, remove}) => {
 			<div className={s.initiative}>
 				<span className={s.initiative_name}>Инициатива</span>
 				<input className={[s.initiative_input, 'input input-border'].join(' ')} {...register(`enemies.${index}.initiative`, { min: 1, setValueAs: (value) => parseInt(value) || 0 })} placeholder='0' />
+			</div>
+			<div className={s.characteristics}>
+				{characteristics.map(characteristic => (
+					<div className={s.characteristic} key={characteristic.id}>
+						<span className={s.characteristic_name}>{characteristic.name}</span>
+						<input className={[s.characteristic_input, 'input input-border'].join(' ')} {...register(`enemies.${index}.${characteristic.id}`, { min: 1, setValueAs: (value) => parseInt(value) || 0 })} placeholder='0' />
+					</div>
+				))}
 			</div>
 			<div className={s.attacks}>
 				<div className={s.attack}>
