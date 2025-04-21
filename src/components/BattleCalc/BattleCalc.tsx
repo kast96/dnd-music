@@ -38,8 +38,6 @@ export const BattleCalc = () => {
 	}
 
 	const result = calcBattle(watch())
-
-	console.log(result)
 	
 	return (
 		<div className={s.container}>
@@ -63,6 +61,14 @@ export const BattleCalc = () => {
 					/>
 				</div>
 			</form>
+			{result && (
+				<div className={s.total}>
+					<div className={s.total_wins}>Побед/Поражений: {result.winCount}/{result.defeatCount}</div>
+					<div className={s.total_precent}>Процент на победу: {Math.round(result.winCount / (result.winCount + result.defeatCount) * 100)}%</div>
+					<div className={s.total_hp}>Среднее HP игроков: {result.playersStartHp} - {Math.round(result.playersStartHp - result.playersHp)} = {Math.round(result.playersHp)}</div>
+					<div className={s.total_hp}>Среднее HP врагов: {result.enemiesStartHp} - {Math.round(result.enemiesStartHp - result.enemiesHp)} = {Math.round(result.enemiesHp)}</div>
+				</div>
+			)}
 		</div>
 	)
 }
